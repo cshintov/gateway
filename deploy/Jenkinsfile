@@ -18,6 +18,8 @@ pipeline {
                     sh """
                         cd deploy/manifests
                         kustomize build overlays/${env_} | kubectl apply -n ${namespace} --record -f -
+                        kubectl rollout restart -n ${namespace} deploy krakend-deployment
+
                     """
                 } 
             }
