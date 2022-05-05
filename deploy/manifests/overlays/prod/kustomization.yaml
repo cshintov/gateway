@@ -1,0 +1,16 @@
+generatorOptions:
+ disableNameSuffixHash: true
+
+resources:
+- ../../base
+
+configMapGenerator:
+- name: krakend-configs
+  behavior: merge
+  files:
+    - krakend.json
+
+patchesStrategicMerge:
+- deployment.yaml
+- service.yaml
+- ingress.yaml

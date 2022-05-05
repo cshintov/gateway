@@ -1,0 +1,12 @@
+generatorOptions:
+ disableNameSuffixHash: true
+
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+
+configMapGenerator:
+- name: krakend-configs
+  files:
+    - krakend.json

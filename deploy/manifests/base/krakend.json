@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "port": 8080,
+    "endpoints": [
+       {
+            "endpoint": "/zhfhir/patient",
+            "encoding": "json",
+            "method": "POST",
+            "headers_to_pass": ["X-Client", "Content-Type"],
+            "backend": [
+            {
+                "host": ["http://zhfhir:8084"],
+                "url_pattern": "/fhir/R4/v1/patient",
+                "extra_config": {
+                    "github.com/devopsfaith/krakend/http": {
+                      "return_error_details": "authentication"
+                    }
+                 }
+            }
+            ]
+        }
+    ]
+}

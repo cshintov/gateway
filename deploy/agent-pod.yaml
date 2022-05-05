@@ -1,0 +1,30 @@
+metadata:
+  labels:
+    app: jenkins-agent
+
+spec:
+  containers:
+
+  - name: kustomize 
+    image: 180648733583.dkr.ecr.us-east-1.amazonaws.com/kustomize:4.1.3
+    imagePullPolicy: Always
+    env:
+      - name: KUBECONFIG
+        value: "/.kube/jenkins.kubeconfig"
+    command:
+      - sleep
+    args:
+      - 9999999
+    volumeMounts:
+      - name: jenkins-kubeconfig
+        mountPath: /.kube
+        readOnly: true
+
+  volumes:
+    - name: jenkins-kubeconfig
+      secret:
+        secretName: jenkins-kubeconfig
+
+  nodeSelector:
+    kubernetes.io/os: "linux"
+    role: "jenkins"
